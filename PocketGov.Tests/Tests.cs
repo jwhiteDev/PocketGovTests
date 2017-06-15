@@ -40,6 +40,7 @@ namespace PocketGov.Tests
         [Test]
         public void LoginTest()
         {
+            Wait(c => c.Marked("Pocketgov Denver"));
             app.Screenshot("Initial Homescreen");
             app.Tap(x => x.Marked("OK"));
             app.Screenshot("Open Sidebar");
@@ -47,8 +48,10 @@ namespace PocketGov.Tests
             app.Screenshot("Select Login Option");
             app.EnterText(x => x.Class("EntryEditText").Index(0), "yasu.hotta@gmail.com");
             app.EnterText(x => x.Class("EntryEditText").Index(1), "Passw0rd!");
+            app.DismissKeyboard();
             app.Screenshot("Enter Login Details");
             app.Tap("Login To Pocketgov");
+            Wait(c => c.Marked("Pocketgov Denver"));
             app.Screenshot("Then I should be logged in");
             app.Tap("OK");
             app.Screenshot("Verify if Login was recognized");
@@ -60,6 +63,7 @@ namespace PocketGov.Tests
         [Test]
         public void LogoutTest()
         {
+            Wait(c => c.Marked("Pocketgov Denver"));
             app.Screenshot("On the Homescreen");
             app.Tap(x => x.Marked("OK"));
             app.Screenshot("Open Sidebar to Logout");
@@ -69,6 +73,11 @@ namespace PocketGov.Tests
 
            var res = app.Query("Login");
            Assert.IsNotEmpty(res);
+        }
+
+        private void Wait(Func<AppQuery, AppQuery> lambda)
+        {
+            app.WaitForElement(lambda, $"Unable to load {lambda.ToString()}", new TimeSpan(0, 0, 0, 15, 0));
         }
     }
 }
