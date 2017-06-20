@@ -10,10 +10,21 @@ namespace PocketGov.Tests
 {
     public class AppInitializer
     {
+
         private static IApp _app;
+        public static IApp App
+        {
+            get
+            {
+                if (_app == null)
+                    throw new NullReferenceException("'AppManager.App' not set. Call 'AppManager.StartApp()' before trying to access it.");
+                return _app;
+            }
+        }
+
         private static bool _isFirstRun = true;
         private static readonly string ApkPath = "../../../org.denvergov.pocketgov-Signed.apk";
-        public static IApp StartApp(Platform platform)
+        public static void StartApp(Platform platform)
         {
             AppDataMode dataMode;
             if (_isFirstRun)
@@ -45,7 +56,6 @@ namespace PocketGov.Tests
                 */
             }
 
-            return _app;
         }
     }
 }
