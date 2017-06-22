@@ -19,21 +19,11 @@ namespace PocketGov.Tests
         protected bool OnAndroid { get; set; }
         protected bool OniOS { get; set; }
 
-        readonly Query flyoutMenuButton;
-        readonly Query loginButton;
-        readonly Query logoutButton;
 
         public BasePage()
         {
             OnAndroid = App.GetType() == typeof(AndroidApp);
             OniOS = App.GetType() == typeof(iOSApp);
-
-            if(OnAndroid)
-            {
-                flyoutMenuButton = x => x.Marked("OK");
-                loginButton = x => x.Marked("Login");
-                logoutButton = x => x.Marked("Logout");
-            }
         }
 
         /// <summary>
@@ -44,22 +34,6 @@ namespace PocketGov.Tests
             Assert.DoesNotThrow(() => App.WaitForElement(trait, $"Unable to load {trait.ToString()}", new TimeSpan(0, 0, 0, 15, 0)));
         }
 
-        //Flyout Menu Navigation
-        public void OpenFlyoutMenu()
-        {
-            App.Tap(flyoutMenuButton);
-            App.Screenshot("Open Sidebar");
-        }
-
-        public void TapLoginButton()
-        {
-            App.Tap(loginButton);
-            App.Screenshot("Select Login Option");
-        }
-
-        public void TapLogoutButton()
-        {
-            App.Tap(logoutButton);
-        }
+        
     }
 }

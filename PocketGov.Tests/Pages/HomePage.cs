@@ -11,12 +11,20 @@ namespace PocketGov.Tests
     public class HomePage : BasePage
     {
         protected Query titleBar;
+        protected Query fab;
+        readonly Query flyoutMenuButton;
+        readonly Query loginButton;
+        readonly Query logoutButton;
 
         public HomePage()
         {
             if(OnAndroid)
             {
                 titleBar = x => x.Marked("Pocketgov Denver");
+                fab = x => x.Class("FormsImageView");
+                flyoutMenuButton = x => x.Marked("OK");
+                loginButton = x => x.Marked("Login");
+                logoutButton = x => x.Marked("Logout");
             }
         }
 
@@ -24,6 +32,29 @@ namespace PocketGov.Tests
         {
             Wait(titleBar);
             App.Screenshot("Loaded Main Page");
+        }
+
+        public void TapFloatingActionButton()
+        {
+            App.Tap(fab);
+        }
+
+        //Flyout Menu Navigation
+        public void OpenFlyoutMenu()
+        {
+            App.Tap(flyoutMenuButton);
+            App.Screenshot("Open Sidebar");
+        }
+
+        public void TapLoginButton()
+        {
+            App.Tap(loginButton);
+            App.Screenshot("Select Login Option");
+        }
+
+        public void TapLogoutButton()
+        {
+            App.Tap(logoutButton);
         }
     }
 }

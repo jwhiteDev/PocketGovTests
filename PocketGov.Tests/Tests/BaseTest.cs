@@ -17,6 +17,8 @@ namespace PocketGov.Tests
 
         protected LoginPage LoginPage;
         protected HomePage HomePage;
+        protected ReportProblemPage ReportProblemPage;
+        protected ReportAdditionalDetailsPage ProblemDetailsPage;
 
         public BaseTest(Platform platform)
         {
@@ -29,6 +31,8 @@ namespace PocketGov.Tests
             AppInitializer.StartApp(platform);
             LoginPage = new LoginPage();
             HomePage = new HomePage();
+            ReportProblemPage = new ReportProblemPage();
+            ProblemDetailsPage = new ReportAdditionalDetailsPage();
         }
 
     }

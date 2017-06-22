@@ -14,7 +14,7 @@ namespace PocketGov.Tests
         {
         }
 
-        [Ignore] //Ignore test for now in main test runs, only us when needed
+         //Ignore test for now in main test runs, only us when needed
         [Test]
         public void ReplTest()
         {
